@@ -14,7 +14,7 @@ def unique_even_sum(numbers):
         num_counts[num] = num_counts.get(num, 0) + 1
     
     # Sum unique even numbers
-    unique_even_sum = sum(num for num in numbers 
+    unique_even_sum = sum(num for num in set(numbers) 
                            if num % 2 == 0 and num_counts[num] == 1)
     
     return unique_even_sum
