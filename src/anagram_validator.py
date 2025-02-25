@@ -1,5 +1,4 @@
 import unicodedata
-import re
 
 def is_anagram(str1: str, str2: str) -> bool:
     """
@@ -24,16 +23,11 @@ def is_anagram(str1: str, str2: str) -> bool:
     
     # Normalize and clean string
     def clean_string(s: str) -> str:
-        # Normalize unicode characters 
-        normalized = unicodedata.normalize('NFKD', s.lower())
-        
-        # Remove non-letter characters, preserving unicode letters
-        cleaned = ''.join(
-            char for char in normalized
-            if unicodedata.category(char)[0] == 'L'
+        # Convert to lowercase and remove all non-letter characters
+        return ''.join(
+            char.lower() for char in s 
+            if char.isalpha()
         )
-        
-        return cleaned
     
     # Clean and compare sorted characters
     cleaned1 = clean_string(str1)
