@@ -23,7 +23,7 @@ def is_anagram(str1: str, str2: str) -> bool:
     # and optionally handle basic accents
     def normalize(s: str) -> str:
         # Remove all whitespace and convert to lowercase
-        normalized = ''.join(s.split()).lower()
+        normalized = ''.join(s.replace(' ', '').lower())
         
         # Optional: simple accent removal
         accent_map = {
