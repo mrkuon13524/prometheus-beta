@@ -19,13 +19,28 @@ def is_anagram(str1: str, str2: str) -> bool:
     if not isinstance(str1, str) or not isinstance(str2, str):
         raise TypeError("Both inputs must be strings")
     
-    # Remove whitespace and convert to lowercase for consistent comparison
-    str1 = str1.replace(" ", "").lower()
-    str2 = str2.replace(" ", "").lower()
+    # Remove whitespace, convert to lowercase, and strip accents
+    def normalize(s: str) -> str:
+        # Remove spaces and convert to lowercase
+        s = s.replace(" ", "").lower()
+        
+        # Optional: simple accent removal (can be expanded for more comprehensive handling)
+        accent_map = {
+            'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u',
+            'ä': 'a', 'ë': 'e', 'ï': 'i', 'ö': 'o', 'ü': 'u',
+            'à': 'a', 'è': 'e', 'ì': 'i', 'ò': 'o', 'ù': 'u'
+        }
+        
+        # Replace accented characters
+        return ''.join(accent_map.get(char, char) for char in s)
+    
+    # Normalize and compare
+    norm1 = normalize(str1)
+    norm2 = normalize(str2)
     
     # Quick length check to rule out non-anagrams quickly
-    if len(str1) != len(str2):
+    if len(norm1) != len(norm2):
         return False
     
     # Use character counting approach
-    return sorted(str1) == sorted(str2)
+    return sorted(norm1) == sorted(norm2)
