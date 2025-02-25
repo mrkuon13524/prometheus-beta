@@ -19,8 +19,7 @@ def test_case_insensitive():
 def test_whitespace_handling():
     """Test anagram detection with whitespace"""
     assert is_anagram("debit card", "bad credit") == True
-    # Update test to match current implementation
-    assert is_anagram("raceacar", "care race") == True
+    assert is_anagram("race a car", "care race") == True
 
 def test_empty_strings():
     """Test anagram detection with empty strings"""
