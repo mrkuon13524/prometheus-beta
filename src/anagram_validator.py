@@ -22,8 +22,8 @@ def is_anagram(str1: str, str2: str) -> bool:
     # Normalize function to remove spaces, convert to lowercase, 
     # and optionally handle basic accents
     def normalize(s: str) -> str:
-        # Remove all whitespace and convert to lowercase
-        normalized = ''.join(s.replace(' ', '').lower())
+        # Remove all non-letter characters and convert to lowercase
+        normalized = ''.join(char.lower() for char in s if char.isalpha())
         
         # Optional: simple accent removal
         accent_map = {
