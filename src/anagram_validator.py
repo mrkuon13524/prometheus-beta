@@ -19,12 +19,13 @@ def is_anagram(str1: str, str2: str) -> bool:
     if not isinstance(str1, str) or not isinstance(str2, str):
         raise TypeError("Both inputs must be strings")
     
-    # Remove whitespace, convert to lowercase, and strip accents
+    # Normalize function to remove spaces, convert to lowercase, 
+    # and optionally handle basic accents
     def normalize(s: str) -> str:
-        # Normalize whitespace and convert to lowercase
-        s = ''.join(s.split()).lower()
+        # Remove all whitespace and convert to lowercase
+        normalized = ''.join(s.split()).lower()
         
-        # Optional: simple accent removal (can be expanded for more comprehensive handling)
+        # Optional: simple accent removal
         accent_map = {
             'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u',
             'ä': 'a', 'ë': 'e', 'ï': 'i', 'ö': 'o', 'ü': 'u',
@@ -32,9 +33,9 @@ def is_anagram(str1: str, str2: str) -> bool:
         }
         
         # Replace accented characters
-        return ''.join(accent_map.get(char, char) for char in s)
+        return ''.join(accent_map.get(char, char) for char in normalized)
     
-    # Normalize and compare
+    # Normalize both strings
     norm1 = normalize(str1)
     norm2 = normalize(str2)
     
